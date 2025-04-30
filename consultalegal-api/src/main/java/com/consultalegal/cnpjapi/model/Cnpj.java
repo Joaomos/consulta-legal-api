@@ -32,6 +32,27 @@ public class Cnpj {
 	private String cnaeSecundario2;
 	
 	
+	
+	
+	public Cnpj(Long id, String cnpj, String razaoSocial, String nomeFantasia, String situacaoCadastral,
+			String dataAbertura, String naturezaJuridica, String capitalSocial, String email, String telefone,
+			String enderecoCompleto, String cnaePrincipal, String cnaeSecundario1, String cnaeSecundario2) {
+		super();
+		this.id = id;
+		this.cnpj = cnpj;
+		this.razaoSocial = razaoSocial;
+		this.nomeFantasia = nomeFantasia;
+		this.situacaoCadastral = situacaoCadastral;
+		this.dataAbertura = dataAbertura;
+		this.naturezaJuridica = naturezaJuridica;
+		this.capitalSocial = capitalSocial;
+		this.email = email;
+		this.telefone = telefone;
+		this.enderecoCompleto = enderecoCompleto;
+		this.cnaePrincipal = cnaePrincipal;
+		this.cnaeSecundario1 = cnaeSecundario1;
+		this.cnaeSecundario2 = cnaeSecundario2;
+	}
 	public Long getId() {
 		return id;
 	}
