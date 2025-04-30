@@ -5,9 +5,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import com.consultalegal.cnpjapi.model.Cnpj;
 
 public interface CnpjRepository2 extends 
-PagingAndSortingRepository<Cnpj, Integer> {
+PagingAndSortingRepository<Cnpj, String> {
 	
-public Iterable<Cnpj> findByNumberContainingIgnoreCase(String parteNome);
+public Iterable<Cnpj> findByCnpjContainingIgnoreCase(String cnpj);
 
 
 }

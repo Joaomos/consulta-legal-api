@@ -34,6 +34,9 @@ public class Cnpj {
 	
 	
 	
+	public Cnpj() {
+		
+	}
 	public Cnpj(Long id, String cnpj, String razaoSocial, String nomeFantasia, String situacaoCadastral,
 			String dataAbertura, String naturezaJuridica, String capitalSocial, String email, String telefone,
 			String enderecoCompleto, String cnaePrincipal, String cnaeSecundario1, String cnaeSecundario2) {

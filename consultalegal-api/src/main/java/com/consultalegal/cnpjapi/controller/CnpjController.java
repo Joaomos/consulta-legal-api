@@ -37,9 +37,9 @@ public class CnpjController {
 		return cnpjRepository.findAll();
 	}
 	
-	@GetMapping(path = "/{number}")
-	public Iterable<Cnpj> getCnpjByNumber(@PathVariable String number) {
-		return cnpjRepository2.findByNumberContainingIgnoreCase(number);
+	@GetMapping(path = "/{cnpj}")
+	public Iterable<Cnpj> getCnpjByNumber(@PathVariable String cnpj) {
+		return cnpjRepository2.findByCnpjContainingIgnoreCase(cnpj);
 	}
 	
 	@GetMapping(path = "/page/{numberPage}/{amountPages}")
