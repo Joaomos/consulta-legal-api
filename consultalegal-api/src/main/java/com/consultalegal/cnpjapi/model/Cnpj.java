@@ -26,7 +26,13 @@ public class Cnpj {
 	private String capitalSocial;
 	private String email;
 	private String telefone;
-	private String enderecoCompleto;
+	private String logradouro;
+	private String numero;
+	private String complemento;
+	private String bairro; 	 	
+	private String municipio;
+	private String uf;
+	private String cep;
 	private String cnaePrincipal;
 	private String cnaeSecundario1;
 	private String cnaeSecundario2;
@@ -37,9 +43,11 @@ public class Cnpj {
 	public Cnpj() {
 		
 	}
+	
 	public Cnpj(Long id, String cnpj, String razaoSocial, String nomeFantasia, String situacaoCadastral,
 			String dataAbertura, String naturezaJuridica, String capitalSocial, String email, String telefone,
-			String enderecoCompleto, String cnaePrincipal, String cnaeSecundario1, String cnaeSecundario2) {
+			String logradouro, String numero, String complemento, String bairro, String municipio, String uf,
+			String cep, String cnaePrincipal, String cnaeSecundario1, String cnaeSecundario2) {
 		super();
 		this.id = id;
 		this.cnpj = cnpj;
@@ -51,11 +59,18 @@ public class Cnpj {
 		this.capitalSocial = capitalSocial;
 		this.email = email;
 		this.telefone = telefone;
-		this.enderecoCompleto = enderecoCompleto;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.municipio = municipio;
+		this.uf = uf;
+		this.cep = cep;
 		this.cnaePrincipal = cnaePrincipal;
 		this.cnaeSecundario1 = cnaeSecundario1;
 		this.cnaeSecundario2 = cnaeSecundario2;
 	}
+
 	public Long getId() {
 		return id;
 	}
@@ -116,12 +131,63 @@ public class Cnpj {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getEnderecoCompleto() {
-		return enderecoCompleto;
+	
+	public String getLogradouro() {
+		return logradouro;
 	}
-	public void setEnderecoCompleto(String enderecoCompleto) {
-		this.enderecoCompleto = enderecoCompleto;
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
 	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getMunicipio() {
+		return municipio;
+	}
+
+	public void setMunicipio(String municipio) {
+		this.municipio = municipio;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 	public String getCnaePrincipal() {
 		return cnaePrincipal;
 	}
