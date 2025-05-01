@@ -106,7 +106,6 @@ public class CnpjService {
                 empresa.setCnaeSecundario1(" "); 
                 empresa.setCnaeSecundario2(" "); 
             }
-     
 
             cnpjRepository.save(empresa);
 
@@ -116,5 +115,7 @@ public class CnpjService {
             e.printStackTrace(); 
             throw new RuntimeException("Erro ao consultar e salvar CNPJ: " + e.getMessage(), e);
         }
+        
     }
+    
 }

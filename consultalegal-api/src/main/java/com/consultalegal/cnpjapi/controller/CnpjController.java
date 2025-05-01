@@ -31,17 +31,20 @@ public class CnpjController {
     @PostMapping
     public ResponseEntity<Cnpj> newCnpj(@Valid @RequestBody Cnpj cnpj) {
         Cnpj savedCnpj = cnpjRepository.save(cnpj);
-        return new ResponseEntity<>(savedCnpj, HttpStatus.CREATED);  // Status 201 Created
+        return new ResponseEntity<>(savedCnpj, HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<Cnpj> updateCnpj(@Valid @RequestBody Cnpj cnpj) {
+    	
         Optional<Cnpj> existingCnpj = cnpjRepository.findById(cnpj.getCnpj());
+        
         if (existingCnpj.isPresent()) {
             Cnpj updatedCnpj = cnpjRepository.save(cnpj);
             return new ResponseEntity<>(updatedCnpj, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);  // Caso o CNPJ não exista
+        
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND); 
     }
 
     @GetMapping
@@ -51,6 +54,7 @@ public class CnpjController {
 
     @GetMapping(path = "/{cnpj}")
     public ResponseEntity<Cnpj> getCnpjByNumber(@PathVariable String cnpj) {
+    	
         Optional<Cnpj> cnpjData = cnpjRepository.findById(cnpj);
 
         if (cnpjData.isPresent()) {
@@ -63,6 +67,7 @@ public class CnpjController {
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);  
         }
+        
     }
 
     @GetMapping(path = "/page/{numberPage}/{amountPages}")
@@ -71,4 +76,5 @@ public class CnpjController {
         Pageable page = PageRequest.of(numberPage, amountPages);
         return cnpjRepository2.findAll(page);
     }
+    
 }
