@@ -62,20 +62,17 @@ public class CnpjService {
 
             JsonNode estabelecimento = root.path("estabelecimento");
 
-            // Log para debugar estrutura recebida
-            System.out.println("Estabelecimento JSON: " + estabelecimento.toPrettyString());
-
             Cnpj empresa = new Cnpj();
             empresa.setCnpj(cnpj);
-            empresa.setRazaoSocial(estabelecimento.path("razao_social").asText(""));
+            empresa.setRazaoSocial(root.path("razao_social").asText(""));
             empresa.setNomeFantasia(estabelecimento.path("nome_fantasia").asText(""));
-            empresa.setSituacaoCadastral(estabelecimento.path("situacao").asText(""));
+            empresa.setSituacaoCadastral(estabelecimento.path("situacao_cadastral").asText(""));
             empresa.setDataAbertura(estabelecimento.path("data_inicio_atividade").asText(""));
 
-            JsonNode naturezaJuridica = estabelecimento.path("natureza_juridica");
-            empresa.setNaturezaJuridica(naturezaJuridica.path("descricao").asText(""));
+            JsonNode naturezaJuridica = root.path("natureza_juridica");
+            empresa.setNaturezaJuridica(naturezaJuridica.path("id").asText("") + " - " + naturezaJuridica.path("descricao").asText(""));
 
-            empresa.setCapitalSocial(estabelecimento.path("capital_social").asText(""));
+            empresa.setCapitalSocial(root.path("capital_social").asText(""));
             empresa.setEmail(estabelecimento.path("email").asText(""));
 
             String ddd = estabelecimento.path("ddd1").asText("");
@@ -97,14 +94,26 @@ public class CnpjService {
 
             JsonNode atividadePrincipal = estabelecimento.path("atividade_principal");
             empresa.setCnaePrincipal(atividadePrincipal.path("descricao").asText(""));
+            
+            JsonNode atividadesSecundarias = estabelecimento.path("atividades_secundarias");
 
-            System.out.println("Empresa antes de salvar: " + empresa);
+            if (atividadesSecundarias.isArray() && atividadesSecundarias.size() > 0) {
+                String primeiraAtividade = atividadesSecundarias.get(0).path("descricao").asText();
+                empresa.setCnaeSecundario1(primeiraAtividade);
+                String segundaAtividade = atividadesSecundarias.get(1).path("descricao").asText();
+                empresa.setCnaeSecundario2(segundaAtividade);
+            } else {
+                empresa.setCnaeSecundario1(" "); 
+                empresa.setCnaeSecundario2(" "); 
+            }
+     
+
             cnpjRepository.save(empresa);
 
             return empresa;
 
         } catch (Exception e) {
-            e.printStackTrace(); // exibe erro no console
+            e.printStackTrace(); 
             throw new RuntimeException("Erro ao consultar e salvar CNPJ: " + e.getMessage(), e);
         }
     }
