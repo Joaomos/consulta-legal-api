@@ -53,12 +53,10 @@ public class CnpjController {
     public ResponseEntity<Cnpj> getCnpjByNumber(@PathVariable String cnpj) {
         Optional<Cnpj> cnpjData = cnpjRepository.findById(cnpj);
 
-        // Verifica se o CNPJ já existe no banco de dados
         if (cnpjData.isPresent()) {
             return new ResponseEntity<>(cnpjData.get(), HttpStatus.OK);
         }
 
-        // Se o CNPJ não for encontrado, faz a consulta à API externa
         try {
             Cnpj cnpjConsultado = cnpjService.consultarCnpj(cnpj);  // Chama o serviço para consultar a API do CNPJá
             return new ResponseEntity<>(cnpjConsultado, HttpStatus.CREATED);  // Retorna o CNPJ que foi salvo no banco
