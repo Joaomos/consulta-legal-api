@@ -61,30 +61,50 @@ public class CnpjService {
             }
 
             JsonNode estabelecimento = root.path("estabelecimento");
-            JsonNode pais = estabelecimento.path("pais");
+
+            // Log para debugar estrutura recebida
+            System.out.println("Estabelecimento JSON: " + estabelecimento.toPrettyString());
 
             Cnpj empresa = new Cnpj();
             empresa.setCnpj(cnpj);
-            empresa.setRazaoSocial(estabelecimento.get("razao_social").asText());
-            empresa.setNomeFantasia(estabelecimento.get("nome_fantasia").asText());
-            empresa.setSituacaoCadastral(estabelecimento.get("situacao").asText());
-            empresa.setDataAbertura(estabelecimento.get("data_inicio_atividade").asText());
-            empresa.setNaturezaJuridica(estabelecimento.get("natureza_juridica").get("descricao").asText());
-            empresa.setCapitalSocial(estabelecimento.get("capital_social").asText());
-            empresa.setEmail(estabelecimento.get("email").asText());
-            empresa.setTelefone(estabelecimento.get("ddd1").asText() + estabelecimento.get("telefone1").asText());
-            empresa.setLogradouro(estabelecimento.get("logradouro").asText());
-            empresa.setNumero(estabelecimento.get("numero").asText());
-            empresa.setComplemento(estabelecimento.get("complemento").asText());
-            empresa.setBairro(estabelecimento.get("bairro").asText());
-            empresa.setMunicipio(estabelecimento.get("cidade").get("nome").asText());
-            empresa.setUf(estabelecimento.get("estado").get("sigla").asText());
-            empresa.setCep(estabelecimento.get("cep").asText());
-            empresa.setCnaePrincipal(estabelecimento.get("atividade_principal").get("descricao").asText());
-            
-            return cnpjRepository.save(empresa);
+            empresa.setRazaoSocial(estabelecimento.path("razao_social").asText(""));
+            empresa.setNomeFantasia(estabelecimento.path("nome_fantasia").asText(""));
+            empresa.setSituacaoCadastral(estabelecimento.path("situacao").asText(""));
+            empresa.setDataAbertura(estabelecimento.path("data_inicio_atividade").asText(""));
+
+            JsonNode naturezaJuridica = estabelecimento.path("natureza_juridica");
+            empresa.setNaturezaJuridica(naturezaJuridica.path("descricao").asText(""));
+
+            empresa.setCapitalSocial(estabelecimento.path("capital_social").asText(""));
+            empresa.setEmail(estabelecimento.path("email").asText(""));
+
+            String ddd = estabelecimento.path("ddd1").asText("");
+            String telefone = estabelecimento.path("telefone1").asText("");
+            empresa.setTelefone(ddd + telefone);
+
+            empresa.setLogradouro(estabelecimento.path("logradouro").asText(""));
+            empresa.setNumero(estabelecimento.path("numero").asText(""));
+            empresa.setComplemento(estabelecimento.path("complemento").asText(""));
+            empresa.setBairro(estabelecimento.path("bairro").asText(""));
+
+            JsonNode cidade = estabelecimento.path("cidade");
+            empresa.setMunicipio(cidade.path("nome").asText(""));
+
+            JsonNode estado = estabelecimento.path("estado");
+            empresa.setUf(estado.path("sigla").asText(""));
+
+            empresa.setCep(estabelecimento.path("cep").asText(""));
+
+            JsonNode atividadePrincipal = estabelecimento.path("atividade_principal");
+            empresa.setCnaePrincipal(atividadePrincipal.path("descricao").asText(""));
+
+            System.out.println("Empresa antes de salvar: " + empresa);
+            cnpjRepository.save(empresa);
+
+            return empresa;
 
         } catch (Exception e) {
+            e.printStackTrace(); // exibe erro no console
             throw new RuntimeException("Erro ao consultar e salvar CNPJ: " + e.getMessage(), e);
         }
     }

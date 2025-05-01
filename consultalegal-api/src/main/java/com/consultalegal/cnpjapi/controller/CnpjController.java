@@ -58,10 +58,10 @@ public class CnpjController {
         }
 
         try {
-            Cnpj cnpjConsultado = cnpjService.consultarCnpj(cnpj);  // Chama o serviço para consultar a API do CNPJá
-            return new ResponseEntity<>(cnpjConsultado, HttpStatus.CREATED);  // Retorna o CNPJ que foi salvo no banco
+            Cnpj cnpjConsultado = cnpjService.consultarCnpj(cnpj);  
+            return new ResponseEntity<>(cnpjConsultado, HttpStatus.CREATED);  
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);  // Caso haja erro na consulta
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);  
         }
     }
 
