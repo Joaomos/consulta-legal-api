@@ -1,21 +1,14 @@
 package com.consultalegal.cnpjapi.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cnpjs")
 public class Cnpj {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 	
-	@Column(nullable = false, unique = true)
+	@Id
 	private String cnpj;
 	
 	private String razaoSocial;
@@ -49,7 +42,6 @@ public class Cnpj {
 			String logradouro, String numero, String complemento, String bairro, String municipio, String uf,
 			String cep, String cnaePrincipal, String cnaeSecundario1, String cnaeSecundario2) {
 		super();
-		this.id = id;
 		this.cnpj = cnpj;
 		this.razaoSocial = razaoSocial;
 		this.nomeFantasia = nomeFantasia;
@@ -71,12 +63,6 @@ public class Cnpj {
 		this.cnaeSecundario2 = cnaeSecundario2;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getCnpj() {
 		return cnpj;
 	}
