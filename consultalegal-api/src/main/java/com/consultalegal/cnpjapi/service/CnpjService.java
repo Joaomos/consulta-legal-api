@@ -72,7 +72,7 @@ public class CnpjService {
             JsonNode naturezaJuridica = root.path("natureza_juridica");
             empresa.setNaturezaJuridica(naturezaJuridica.path("id").asText("") + " - " + naturezaJuridica.path("descricao").asText(""));
 
-            empresa.setCapitalSocial(root.path("capital_social").asText(""));
+            empresa.setCapitalSocial("R$ " + root.path("capital_social").asText(""));
             empresa.setEmail(estabelecimento.path("email").asText(""));
 
             String ddd = estabelecimento.path("ddd1").asText("");
